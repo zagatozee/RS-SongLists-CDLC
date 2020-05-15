@@ -24,7 +24,7 @@ DWORD WINAPI MainThread(void*) {
 			printf("Patch verify_signature success!\n");
 	}
 
-	bool loftEnabled = true;
+	// bool loftEnabled = true;
 
 	mem.LoadSettings();
 

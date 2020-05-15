@@ -7,74 +7,6 @@ RandomMemStuff::RandomMemStuff()
 
 }
 
-uintptr_t RandomMemStuff::FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
-{
-	uintptr_t addr = ptr;
-	for (unsigned int i = 0; i < offsets.size(); ++i)
-	{
-		addr = *(uintptr_t*)addr;
-
-		if (addr == NULL)
-			return NULL;
-
-		addr += offsets[i];
-	}
-	return addr;
-}
-
-void RandomMemStuff::AddVolume(float add) {
-	uintptr_t addr = FindDMAAddy( (uintptr_t)GetModuleHandle(NULL) + 0x00F4E91C, { 0x28, 0x7C0, 0x214, 0x7F4, 0xDC });
-
-	float val = *(float*)addr;
-
-	if (val+add >= 100.0f)
-		return;
-
-	 *(float*)addr = val+add;
-}
-
-void RandomMemStuff::DecreaseVolume(float remove) {
-	uintptr_t addr = FindDMAAddy((uintptr_t)GetModuleHandle(NULL) + 0x00F4E91C, { 0x28, 0x7C0, 0x214, 0x7F4, 0xDC });
-
-	float val = *(float*)addr;
-
-	if (val + remove <= 0.0f)
-		return;
-
-	*(float*)addr = val + remove;
-}
-
-void RandomMemStuff::ToggleLoft() {
-	uintptr_t addr = FindDMAAddy((uintptr_t)GetModuleHandle(NULL) + 0x00F5C4EC, { 0x108, 0x14, 0x28, 0x7C  });
-
-	if (*(float*)addr == 10)
-		*(float*)addr = 10000;
-	else
-		*(float*)addr = 10;
-}
-
-void RandomMemStuff::ToggleLoftWhenSongStarts() {
-	uintptr_t addrTimer = FindDMAAddy((uintptr_t)GetModuleHandle(NULL) + 0x00F5C5AC, { 0xB0, 0x538, 0x8 });
-	uintptr_t addrLoft = FindDMAAddy((uintptr_t)GetModuleHandle(NULL) + 0x00F5C4EC, { 0x108, 0x14, 0x28, 0x7C });
-
-	if (*(float*)addrLoft != 10)
-		return;
-
-	return;
-	if (*(float*)addrTimer >= 0.1 )
-		*(float*)addrLoft = 10000;
-}
-
-void RandomMemStuff::ShowSongTimer() {
-	uintptr_t addrTimer = FindDMAAddy((uintptr_t)GetModuleHandle(NULL) + 0x01567AB0, { 0x80, 0x20, 0x10C, 0x244 });
-	
-	if (!addrTimer)
-		return;
-
-	std::string valStr = std::to_string(*(float*)addrTimer);
-	MessageBoxA(NULL, valStr.c_str(), "", 0);
-}
-
 
 
 DWORD func_getStringFromCSV = 0x017B7A3E;
@@ -181,27 +113,6 @@ void __declspec(naked) missingLocalizationHookFunc() {
 		jmp[hookBackAddr_missingLocalization]
 	}
 }
-
-/* NOTE TO SELF: don't hook just before a conditional jump :D
-//DWORD hookAddrCustom = 0x013957DD;	
-void __declspec(naked) songListCustomHook() { 
-	__asm { //ECX = "$[4696x]SONG LIST"
-		mov esi, DWORD PTR[esi] 
-		cmp DWORD PTR[ebp + 0xC], ecx //OG part
-
-		pushad
-		//pushfd
-
-		//cmp byte ptr [ecx + 0x2], 0x34
-		//JNZ GTFO //CMP compares chars by division, so if diff > 0 -> not equal
-		nop
-
-		GTFO:
-		popad
-		jmp[hookBackAddr2]
-	}
-}
-*/
 
 void RandomMemStuff::PatchSongListAppendages() {
 	patch.PatchAdr((BYTE*)patch_addedSpaces, (UINT*)"\x58\x58\x90\x90\x90", 5); //patch out " "

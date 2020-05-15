@@ -11,11 +11,6 @@ public:
 	RandomMemStuff();
 	~RandomMemStuff();
 
-	void AddVolume(float add);
-	void DecreaseVolume(float remove);
-	void ToggleLoft();
-	void ToggleLoftWhenSongStarts();
-	void ShowSongTimer();
 	void PatchSongListAppendages();
 	void HookSongLists();
 	void HookSongListsKoko();
