@@ -6,6 +6,10 @@
 #include "Patch.h"
 #include <cstdlib>
 #include "RandomMemStuff.h"
+ 
+/* ZZ Based on Lovrom8 and Kokos work, I've just slimmed out some functions to make a basic version that JUST does the songlist mod and enables CDLC.
+If maingame.csv is modified with entries in 46964-9 - then those will be used, If NOT, the RSMods.ini ill be used.
+*/
 
 DWORD WINAPI MainThread(void*) {	
 	RandomMemStuff mem;
@@ -22,46 +26,24 @@ DWORD WINAPI MainThread(void*) {
 
 	bool loftEnabled = true;
 
-	mem.LoadSettings(); 
+	mem.LoadSettings();
 
 	while (true) {
 
 		Sleep(100);
 
 		{
-			mem.HookSongLists(); //ZZ should be reading the RSMods.ini file to fetch song lists.
-		}
-		 
-		/*if (GetAsyncKeyState(VK_INSERT) & 1) {
-			mem.AddVolume(5);
-		}
-
-		if (GetAsyncKeyState(VK_END) & 1) {
-			mem.DecreaseVolume(5);
-		}
-
-		if (GetAsyncKeyState('L') & 1) {
-			mem.HookSongLists();
-		}
-
-		if (GetAsyncKeyState('K')) {
 			mem.HookSongListsKoko();
 		}
-
-		if (GetAsyncKeyState('T') & 1) {
-			mem.ToggleLoft();
-		}*/ //ZZ commenting out to try and just force the single song list mod as one and done
-
-		//mem.ToggleLoftWhenSongStarts();
-
+		 
 	}
 	
 
 	return 0;
 }
-	
 
-	void Initialize(void) {
+
+void Initialize(void) {
 	CreateThread(NULL, 0, MainThread, NULL, NULL, 0);
 }
 

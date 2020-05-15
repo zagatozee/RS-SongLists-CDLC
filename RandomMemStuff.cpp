@@ -22,7 +22,7 @@ uintptr_t RandomMemStuff::FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> o
 	return addr;
 }
 
-/* void RandomMemStuff::AddVolume(float add) {
+void RandomMemStuff::AddVolume(float add) {
 	uintptr_t addr = FindDMAAddy( (uintptr_t)GetModuleHandle(NULL) + 0x00F4E91C, { 0x28, 0x7C0, 0x214, 0x7F4, 0xDC });
 
 	float val = *(float*)addr;
@@ -63,9 +63,9 @@ void RandomMemStuff::ToggleLoftWhenSongStarts() {
 	return;
 	if (*(float*)addrTimer >= 0.1 )
 		*(float*)addrLoft = 10000;
-} */ // ZZ slimming
+}
 
-/* void RandomMemStuff::ShowSongTimer() {
+void RandomMemStuff::ShowSongTimer() {
 	uintptr_t addrTimer = FindDMAAddy((uintptr_t)GetModuleHandle(NULL) + 0x01567AB0, { 0x80, 0x20, 0x10C, 0x244 });
 	
 	if (!addrTimer)
@@ -73,7 +73,7 @@ void RandomMemStuff::ToggleLoftWhenSongStarts() {
 
 	std::string valStr = std::to_string(*(float*)addrTimer);
 	MessageBoxA(NULL, valStr.c_str(), "", 0);
-} */ // ZZ Slimming
+}
 
 
 
@@ -217,16 +217,16 @@ void RandomMemStuff::SetFakeListNames() {
 	patch.PlaceHook((void*)hookAddr_ModifyLocalized, hook_fakeTitles, len);
 }
 
- void RandomMemStuff::HookSongLists() {
+void RandomMemStuff::HookSongLists() {
 	SetFakeListNames();
 
 	len = 6;
 	hookBackAddr_CustomNames = hookAddr_ModifyCleanString + len;
 
 	patch.PlaceHook((void*)hookAddr_ModifyCleanString, hook_basicCustomTitles, len);
-} // ZZ removing as unnecesary if using ini list
+}
 
- /* void RandomMemStuff::HookSongListsKoko() {
+void RandomMemStuff::HookSongListsKoko() {
 	SetFakeListNames();
 
 	len = 5;
@@ -236,7 +236,7 @@ void RandomMemStuff::SetFakeListNames() {
 	patch.PatchAdr((BYTE*)patch_sprintfArg, (BYTE*)"\x04", 1);
 
 	patch.PlaceHook((void*)hookAddr_MissingLocalization, missingLocalizationHookFunc, len);
-} */
+}
 
 bool RandomMemStuff::LoadSettings() {
 	INIReader reader("RSMods.ini");
