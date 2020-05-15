@@ -217,16 +217,16 @@ void RandomMemStuff::SetFakeListNames() {
 	patch.PlaceHook((void*)hookAddr_ModifyLocalized, hook_fakeTitles, len);
 }
 
-/* void RandomMemStuff::HookSongLists() {
+ void RandomMemStuff::HookSongLists() {
 	SetFakeListNames();
 
 	len = 6;
 	hookBackAddr_CustomNames = hookAddr_ModifyCleanString + len;
 
 	patch.PlaceHook((void*)hookAddr_ModifyCleanString, hook_basicCustomTitles, len);
-}*/ // ZZ removing as unnecesary if using ini list
+} // ZZ removing as unnecesary if using ini list
 
- void RandomMemStuff::HookSongListsKoko() {
+ /* void RandomMemStuff::HookSongListsKoko() {
 	SetFakeListNames();
 
 	len = 5;
@@ -236,7 +236,7 @@ void RandomMemStuff::SetFakeListNames() {
 	patch.PatchAdr((BYTE*)patch_sprintfArg, (BYTE*)"\x04", 1);
 
 	patch.PlaceHook((void*)hookAddr_MissingLocalization, missingLocalizationHookFunc, len);
-} 
+} */
 
 bool RandomMemStuff::LoadSettings() {
 	INIReader reader("RSMods.ini");
