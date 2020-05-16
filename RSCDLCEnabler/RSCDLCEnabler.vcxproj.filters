@@ -52,8 +52,5 @@
     <None Include="d3dx9_42.def">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="CKeyEvents.cpp">
-      <Filter>Source Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

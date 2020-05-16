@@ -8,7 +8,6 @@ RandomMemStuff::RandomMemStuff()
 }
 
 
-
 DWORD func_getStringFromCSV = 0x017B7A3E;
 DWORD func_getLocalizedString = 0x01395763;
 DWORD func_appendString = 0x01395488; //for reference purposes
