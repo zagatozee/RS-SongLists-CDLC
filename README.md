@@ -8,7 +8,7 @@ The RSMods.ini file is the method 99.9999999% of users should be using, maingame
 
 How to use?
 
-Download the D3DX9_42.dll  file from the "ready to download" folder, this replaces the existing CDLC enabling one in your Rockmsith2014 root folder. CDLC will still work just fine.
+Download the D3DX9_42.dll  file from the "ready to download" folder, this replaces the existing CDLC enabling one in your Rocksmith2014 root folder. CDLC will still work just fine.
 Download the RSMods.ini file to the same folder as the .dll file - \Rocksmith2014\
 
 Edit the RSMods.ini file to define your 6 chosen song list names and save.
